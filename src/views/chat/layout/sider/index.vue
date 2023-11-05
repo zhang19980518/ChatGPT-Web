@@ -1,7 +1,7 @@
 <script setup lang='ts'>
 import type { CSSProperties } from 'vue'
 import { computed, ref, watch } from 'vue'
-import { NButton, NLayoutSider, useDialog } from 'naive-ui'
+import { NButton, NLayoutSider, useDialog, useMessage } from 'naive-ui'
 import List from './List.vue'
 import Footer from './Footer.vue'
 import { useAppStore, useChatStore } from '@/store'
@@ -11,6 +11,7 @@ import { t } from '@/locales'
 
 const appStore = useAppStore()
 const chatStore = useChatStore()
+const message = useMessage()
 
 const dialog = useDialog()
 
@@ -62,6 +63,9 @@ const mobileSafeArea = computed(() => {
   return {}
 })
 
+const handleRoleDialog = () => {
+  message.warning('正在开发')
+}
 watch(
   isMobile,
   (val) => {
@@ -98,7 +102,7 @@ watch(
         </div>
         <div class="flex items-center p-4 space-x-4">
           <div class="flex-1">
-            <NButton block @click="show = true">
+            <NButton block @click="handleRoleDialog">
               {{ $t('store.siderButton') }}
             </NButton>
           </div>
